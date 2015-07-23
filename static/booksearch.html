@@ -1,8 +1,11 @@
 <!doctype html>
-<html ng-app="jewel">
+<html ng-app="bookSearch">
 <head>
-<title>Jewel</title>
+<title>Book Search</title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script src="app.js"></script>
+<script src="search-service.js"></script>
+<script src="app-controller.js"></script>
 </head>
 <body>
 
@@ -12,7 +15,7 @@
 			<input type="submit">
 		</form>
 		<img alt="loading spinner" 
-				ng-show="bookSearch.searchService.isLoading()" src="img/spinner.gif" />
+				ng-show="bookSearch.searchFactory.isLoading()" src="img/ajax-loader.gif" />
 
 		<table>
 			<thead>
@@ -23,9 +26,9 @@
 			</thead>
 
 			<tbody>
-			<tr ng-repeat="entry in bookSearchResults()">
-				<td> {{ record.filename}} </td>
-				<td> {{ record.sentence }} </td>
+			<tr ng-repeat="entry in bookSearch.getbookSearchResults()">
+				<td> {{ entry.filename}} </td>
+				<td> {{ entry.sentence }} </td>
 			</tr>
 			</tbody>
 		</table>

@@ -1,16 +1,30 @@
-function bookSearchController(searchService) {
-  var vm = this;
-	vm.query = query;
-	vm.sendSearchRequest = sendSearchRequest;
+(function() {
 
-	function sendSearchRequest() {
-		return vm.searchService.getSearchResults(vm.query)
-				.then(function(data) {
-					vm.results = data;
-					return vm.results_;
-		});;
+	angular.module('bookSearch')
+			.controller('bookSearchController', ['searchFactory', bookSearchController])
 
-	function getbookSearchResults() {
-		return vm.results_;
+	function bookSearchController(searchFactory) {
+		var vm = this;
+		/**
+		/* bound to form text
+		/* @type string
+		*/
+		vm.query;
+		vm.results_;
+		vm.searchFactory = searchFactory;
+		vm.sendSearchRequest = sendSearchRequest;
+		vm.getBookSearchResults = getBookSearchResults;
+
+		function sendSearchRequest() {
+			return vm.searchFactory.fetchSearchResults(vm.query)
+					.then(function(data) {
+						vm.results = data;
+						return vm.results_;
+			});
+		}
+
+		function getBookSearchResults() {
+			return vm.results_[vm.query];
+		}
 	}
-}
+})();

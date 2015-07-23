@@ -1,31 +1,37 @@
-function searchService($http) {
-	var isReady_ = false;
-	var http_ = $http;
-	var service = {
-		isLoading: isLoading,
-		fetchSearchResults: fetchSearchResults,
-	};
-	return service;
+(function() {
 
-	// Function declarations below
+	angular.module('bookSearch')
+			.factory('searchFactory', ['$http', searchFactory]);
 
-	function isLoading() {
-		return !isReady;
-	}
+	function searchFactory($http) {
+		var isReady_ = true;
+		var http_ = $http;
+		var service = {
+			isLoading: isLoading,
+			fetchSearchResults: fetchSearchResults,
+		};
+		return service;
 
-	function fetchSearchResults(query) {
-		return $http.get('/test_results')
-				.then(fetchSearchResultsSuccess)
-				.catch(fetchSearchResultsFailure);
+		// Function declarations below
 
-		function fetchSearchResultsSuccess(response) {
-			return response.data.results;
+		function isLoading() {
+			return !isReady_;
 		}
 
-		function fetchSearchResultsFailure(error) {
-			logger.error('XHR failed for getSearchResults.');
+		function fetchSearchResults(query) {
+			isReady_ = false;
+			return http_.get('/test_results.json')
+					.then(fetchSearchResultsSuccess)
+					.catch(fetchSearchResultsFailure)
+					.finally(function() { isReady_ = true });
+
+			function fetchSearchResultsSuccess(response) {
+				return response.data.results;
+			}
+
+			function fetchSearchResultsFailure(error) {
+				console.log('XHR failed for getSearchResults.');
+			}
 		}
-
 	}
-
-}
+})();
