@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="jewel">
+<head>
+<title>Jewel</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+</head>
+<body>
+
+	<div ng-controller="bookSearchController as bookSearch">
+		<form ng-submit="bookSearch.sendSearchRequest()">
+			<input type="text" ng-model="bookSearch.query" size="30">
+			<input type="submit">
+		</form>
+		<img alt="loading spinner" 
+				ng-show="bookSearch.searchService.isLoading()" src="img/spinner.gif" />
+
+		<table>
+			<thead>
+			<tr>
+				<th>Filename</th>
+				<th>Sentence</th>
+			</tr>
+			</thead>
+
+			<tbody>
+			<tr ng-repeat="entry in bookSearchResults()">
+				<td> {{ record.filename}} </td>
+				<td> {{ record.sentence }} </td>
+			</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</body>
