@@ -1,9 +1,12 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 import json
+import time
+
 app = Flask(__name__)
+app.debug = True
 
 @app.route('/')
-def hello_world():
+def index():
   return redirect(url_for('static', filename='booksearch.html'))
 
 @app.route('/test_results.json')
