@@ -1,8 +1,5 @@
 (function() {
 
-	angular.module('bookSearch')
-			.filter('flattenRows', function() { return flattenRows } );
-
 	/**
 	/* Flattens the results object into an array so ng-repeat can work
 	/* over table rows.
@@ -27,13 +24,16 @@
   /*      'filename': 'file1'}
   /* ]
 	*/
-	function flattenRows(results) {
-		var rows = [];
-		angular.forEach(results, function(wordInfoList, word) {
-			Array.prototype.push.apply(rows, wordInfoList);
-		});
-		console.log('flattenRows called');
-		return rows;
-	}
+	angular.module('bookSearch')
+			.filter('flattenRows', function() {
+				return function(results) {
+					var rows = [];
+					angular.forEach(results, function(wordInfoList, word) {
+						Array.prototype.push.apply(rows, wordInfoList);
+					});
+					console.log('flattenRows called');
+					return rows;
+				}
+			});
 
 })();
