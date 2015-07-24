@@ -15,8 +15,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'static/*.js',
-      'static/tests/*.js'
+			{pattern: 'node_modules/angular/angular.js', watch: false},
+			{pattern: 'node_modules/angular-mocks/angular-mocks.js', watch: false},
+      'static/app.js',
+      'static/search-service.js',
+      'static/flattenrows-filter.js',
+      'static/highlightwords-filter.js',
+      'static/app-controller.js',
+      'static/js_tests/*.js'
     ],
 
 
