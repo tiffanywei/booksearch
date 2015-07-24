@@ -1,30 +1,34 @@
 (function() {
 
 	angular.module('bookSearch')
-			.controller('bookSearchController', ['searchFactory', bookSearchController])
+			.controller('bookSearchController', [
+				'searchFactory',
+				'flattenRowsFilter',
+				'highlightWordsFilter',
+				bookSearchController])
 
-	function bookSearchController(searchFactory) {
+	function bookSearchController( searchFactory, flattenRowsFilter, highlightWordsFilter) {
 		var vm = this;
 		/**
 		/* bound to form text
 		/* @type string
 		*/
 		vm.query;
-		vm.results_;
+		vm.results;
 		vm.searchFactory = searchFactory;
 		vm.sendSearchRequest = sendSearchRequest;
-		vm.getBookSearchResults = getBookSearchResults;
 
 		function sendSearchRequest() {
 			return vm.searchFactory.fetchSearchResults(vm.query)
 					.then(function(data) {
-						vm.results = data;
-						return vm.results_;
+						processResults_(data);
+						console.log(vm.results);
+						return vm.results;
 			});
 		}
 
-		function getBookSearchResults() {
-			return vm.results_[vm.query];
+		function processResults_(results) {
+			vm.results = flattenRowsFilter(highlightWordsFilter(results));
 		}
 	}
 })();

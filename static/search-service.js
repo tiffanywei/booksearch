@@ -26,7 +26,7 @@
 					.finally(function() { isReady_ = true });
 
 			function fetchSearchResultsSuccess(response) {
-				return response.data.results;
+				return response.data;
 			}
 
 			function fetchSearchResultsFailure(error) {

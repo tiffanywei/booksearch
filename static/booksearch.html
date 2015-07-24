@@ -5,6 +5,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 <script src="app.js"></script>
 <script src="search-service.js"></script>
+<script src="flattenrows-filter.js"></script>
+<script src="highlightwords-filter.js"></script>
 <script src="app-controller.js"></script>
 </head>
 <body>
@@ -26,9 +28,9 @@
 			</thead>
 
 			<tbody>
-			<tr ng-repeat="entry in bookSearch.getbookSearchResults()">
-				<td> {{ entry.filename}} </td>
-				<td> {{ entry.sentence }} </td>
+			<tr ng-repeat="entry in bookSearch.results">
+				<td> {{ entry.filename }} </td>
+				<td> <span ng-bind-html="entry.sentence"></span></td>
 			</tr>
 			</tbody>
 		</table>
