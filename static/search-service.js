@@ -20,7 +20,7 @@
 
 		function fetchSearchResults(query) {
 			isReady_ = false;
-			return http_.get('/test_results.json')
+			return http_.get('/'.concat(query))
 					.then(fetchSearchResultsSuccess)
 					.catch(fetchSearchResultsFailure)
 					.finally(function() { isReady_ = true });

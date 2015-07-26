@@ -2,6 +2,16 @@
 <html ng-app="bookSearch">
 <head>
 <title>Book Search</title>
+<style>
+.highlighted { 
+    background-color: yellow;
+}
+table, th, td {
+  border: 2px solid #E6E6E6;
+	border-collapse: collapse;
+	padding: 5px;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 <script src="app.js"></script>
 <script src="search-service.js"></script>
@@ -19,10 +29,12 @@
 		<img alt="loading spinner" 
 				ng-show="bookSearch.searchFactory.isLoading()" src="img/ajax-loader.gif" />
 
-		<table>
+		<table class="table">
 			<thead>
 			<tr>
 				<th>Filename</th>
+				<th>Book Title</th>
+				<th>Chapter</th>
 				<th>Sentence</th>
 			</tr>
 			</thead>
@@ -30,6 +42,8 @@
 			<tbody>
 			<tr ng-repeat="entry in bookSearch.results">
 				<td> {{ entry.filename }} </td>
+				<td> {{ entry.book }} </td>
+				<td> {{ entry.chapter }} </td>
 				<td> <span ng-bind-html="entry.sentence"></span></td>
 			</tr>
 			</tbody>
