@@ -1,0 +1,24 @@
+required installations:
+python:
+
+flask
+foreman
+gunicorn
+BeautifulSoup
+html5lib
+nltk
+requests
+
+javascript:
+
+karma
+jasmine
+angular
+angular-mocks
+
+
+run venv first
+. venv/bin/activate
+
+to setup database
+python sqlmanager.py
