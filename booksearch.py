@@ -3,18 +3,20 @@ import time
 from flask import Flask, redirect, url_for
 from flask.ext.cache import Cache
 
-from models.bookparser import BookParser
 import models.sqlmanager as sqlmanager
 import models.synonyms as synonyms
 
 app = Flask(__name__)
 app.debug = True
+app.config['CACHE_TYPE'] = 'simple'
+app.cache = Cache(app)
 	
 @app.route('/')
 def index():
   return redirect(url_for('static', filename='booksearch.html'))
 
 @app.route('/<string:word>')
+@app.cache.memoize(timeout=60)
 def get_results_for_word(word):
 	word_synonyms = (word,) + tuple(synonyms.get_synonyms(word))
 	return json.dumps(sqlmanager.retrieve_words_contexts(word_synonyms))
