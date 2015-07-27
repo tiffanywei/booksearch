@@ -4,7 +4,8 @@ python:
 flask
 foreman
 gunicorn
-BeautifulSoup
+BeautifulSoup4
+Flask-Cache
 html5lib
 nltk
 requests
@@ -22,3 +23,9 @@ run venv first
 
 to setup database
 python sqlmanager.py
+
+to start server
+foreman start
+
+to start karma
+./node_modules/karma/bin/karma start karma.conf.js

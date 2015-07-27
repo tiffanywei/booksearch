@@ -9,8 +9,12 @@
 	angular.module('bookSearch')
 			.filter('highlightWords', ['$sce', function($sce) {
 				return function(sentence, word) {
-					return $sce.trustAsHtml(sentence.replace(
-						new RegExp('('+word+')', 'gi'), '<span class="highlighted">$1</span>'));
+					if (sentence && word) {
+						return $sce.trustAsHtml(sentence.replace(
+							new RegExp('('+word+')', 'gi'), '<span class="highlighted">$1</span>'));
+					} else {
+						return sentence
+					}
 				}
 			}]);
 
