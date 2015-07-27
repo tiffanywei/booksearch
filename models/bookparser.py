@@ -83,6 +83,7 @@ class BookParser(object):
 		"""
 		word = word.encode('utf-8').lower()
 		context_dict = {
+			'word': word,
 			'book': book_title.encode('utf-8').replace('\n', ' '),
 			'chapter': chapter_title.encode('utf-8').replace('\n', ' '),
 			'filename': file_name.encode('utf-8').replace('\n', ' '),

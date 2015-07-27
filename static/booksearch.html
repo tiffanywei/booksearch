@@ -4,8 +4,9 @@
 <title>Book Search</title>
 <style>
 .highlighted { 
-    background-color: yellow;
+  background-color: yellow;
 }
+
 table, th, td {
   border: 2px solid #E6E6E6;
 	border-collapse: collapse;
@@ -43,8 +44,10 @@ table, th, td {
 			<tr ng-repeat="entry in bookSearch.results">
 				<td> {{ entry.filename }} </td>
 				<td> {{ entry.book }} </td>
-				<td> {{ entry.chapter }} </td>
-				<td> <span ng-bind-html="entry.sentence"></span></td>
+				<td> {{ entry.chapter }}</td>
+				<td><span ng-bind-html="entry.sentence | limitTo : (isFullyShown ? 9999 : 140) : begin | highlightWords:entry.word"></span>
+				<a href="#" ng-click="isFullyShown = !isFullyShown" ng-show="entry.sentence.length > 140">{{ isFullyShown ? "hide" : "..."}}</a>
+				</td>
 			</tr>
 			</tbody>
 		</table>

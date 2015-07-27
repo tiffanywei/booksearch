@@ -8,14 +8,9 @@
 	*/
 	angular.module('bookSearch')
 			.filter('highlightWords', ['$sce', function($sce) {
-				return function(results) {
-					angular.forEach(results, function(wordInfoList, word) {
-						angular.forEach(wordInfoList, function(wordInfo) {
-							wordInfo.sentence = $sce.trustAsHtml(wordInfo.sentence.replace(
-								new RegExp('('+word+')', 'gi'), '<span class="highlighted">$1</span>'));
-						});
-					});
-					return results;
+				return function(sentence, word) {
+					return $sce.trustAsHtml(sentence.replace(
+						new RegExp('('+word+')', 'gi'), '<span class="highlighted">$1</span>'));
 				}
 			}]);
 

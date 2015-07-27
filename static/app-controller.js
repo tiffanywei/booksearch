@@ -28,7 +28,7 @@
 		}
 
 		function processResults_(results) {
-			vm.results = flattenRowsFilter(highlightWordsFilter(results));
+			vm.results = flattenRowsFilter(results);
 		}
 	}
 })();
