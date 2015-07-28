@@ -16,7 +16,7 @@ def index():
 	"""
 	Homepage of the app.
 	"""
-  return redirect(url_for('static', filename='booksearch.html'))
+	return redirect(url_for('static', filename='booksearch.html'))
 
 @app.route('/<string:word>')
 @app.cache.memoize(timeout=60)
