@@ -13,16 +13,26 @@ app.cache = Cache(app)
 	
 @app.route('/')
 def index():
+	"""
+	Homepage of the app.
+	"""
   return redirect(url_for('static', filename='booksearch.html'))
 
 @app.route('/<string:word>')
 @app.cache.memoize(timeout=60)
 def get_results_for_word(word):
+	"""
+	Looks up word synonyms then queries for word contexts that match any
+	of the words.  Memoized because requests are expensive.
+	"""
 	word_synonyms = (word,) + tuple(synonyms.get_synonyms(word))
 	return json.dumps(sqlmanager.retrieve_words_contexts(word_synonyms))
 
 @app.route('/test_results.json')
 def test_results():
+	"""
+	For client side testing only.
+	"""
 	time.sleep(1)
 	results = {
     'hello': [

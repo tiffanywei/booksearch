@@ -7,10 +7,10 @@
 				'highlightWordsFilter',
 				bookSearchController])
 
-	function bookSearchController( searchFactory, flattenRowsFilter, highlightWordsFilter) {
+	function bookSearchController(searchFactory, flattenRowsFilter, highlightWordsFilter) {
 		var vm = this;
 		/**
-		/* bound to form text
+		/* bound to form text in template
 		/* @type string
 		*/
 		vm.query;

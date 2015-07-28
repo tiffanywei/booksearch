@@ -3,6 +3,9 @@
 	angular.module('bookSearch')
 			.factory('searchFactory', ['$http', searchFactory]);
 
+	/**
+	/* Handles the XHR request to the server for getting search results.
+	*/
 	function searchFactory($http) {
 		var isReady_ = true;
 		var http_ = $http;
@@ -19,6 +22,7 @@
 		}
 
 		function fetchSearchResults(query) {
+			// isReady_ = false will trigger ajax spinner gif
 			isReady_ = false;
 			return http_.get('/'.concat(query))
 					.then(fetchSearchResultsSuccess)
