@@ -4,6 +4,9 @@ import json
 from bookparser import BookParser
 
 def retrieve_words_contexts(word_tuple):
+	"""
+	Queries sqlite database for all rows matching any of the words in the word_tuple.
+	"""
 	conn = sqlite3.connect('test.db')
 	cur = conn.cursor()
 	query = """
@@ -19,6 +22,10 @@ def retrieve_words_contexts(word_tuple):
 	return word_context_dict
 
 def create_database():
+	"""
+	Uses BookParser to process the html book files into a data structure in memory
+	then iterates through and stores in a sqlite file.
+	"""
 	conn = sqlite3.connect('test.db')
 	cur = conn.cursor()
 	create_table = """
